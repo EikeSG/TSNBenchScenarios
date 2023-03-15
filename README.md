@@ -2,7 +2,7 @@
 This dataset provides scenarios for testing Time-Sensitive Networking (TSN) schedulers originally developed as part of the following publication:
 - E. Schweissguth, S. Mehner, D. Hellmanns, J. Falk, H. Parzyjegla, P. Danielis, O. Hohlfeld, G. Muehl, and D. Timmermann, "**TSN Scheduler Benchmarking.**" in *WFCS 2023*. IEEE.
 
-Please refer to the paper for detailed background information. Refer to the linked "**TSN Scheduler Benchmarking: Results**" for a comparison six scheduler configurations based on this scenario dataset. Also check the linked GitHub repository for updates and for a good in-browser view (especially for markdown files).
+Please refer to the paper for detailed background information. Refer to "**TSN Scheduler Benchmarking: Results**" (https://github.com/EikeSG/TSNBenchResults or linked projects on Zenodo) for an initial comparison of multiple schedulers based on this scenario dataset. When accessing this dataset through Zenodo, also check the corresponding GitHub repository (https://github.com/EikeSG/TSNBenchScenarios) for updates and for a good in-browser view (especially for markdown files).
 
 The scenarios comprise the input files for our initial *factor screening*, and our [*benchmarking scenarios*](#benchmarking-scenarios-and-test-cases) intended for re-use by other researchers. The structure of the scenario dataset is described in the following. When using the dataset, please consider our notes on [*licensing and citation*](#license-and-citation).
 
@@ -102,4 +102,4 @@ This scenarios dataset is made available under the Open Database License: http:/
 
 When using our scenarios, please cite:
 - E. Schweissguth, S. Mehner, D. Hellmanns, J. Falk, H. Parzyjegla, P. Danielis, O. Hohlfeld, G. Muehl, and D. Timmermann, "TSN Scheduler Benchmarking." in *WFCS 2023*. IEEE.
-- E. Schweissguth, S. Mehner, D. Hellmanns "TSN Scheduler Benchmarking: Scenarios." [Online]. Available: (insert zenodo url of this release)
+- E. Schweissguth, S. Mehner, D. Hellmanns "TSN Scheduler Benchmarking: Scenarios." [Online]. Available: (insert zenodo url of the specific release you used)
