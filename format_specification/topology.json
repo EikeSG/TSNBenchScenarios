@@ -1,0 +1,75 @@
+// Note that the topology files are fully compatible to the Python library 'networkx'.
+{
+    "directed": true,   // we model network links as directed edges
+    "multigraph": true, // allows having redundant links between a pair of nodes
+    "graph": {
+        // optional hints for the route preprocessing of some schedulers
+        "path_length_cutoff_abs": 28,
+        "path_length_cutoff_rel": 3
+        // For example, in our benchmarking they are used by b-ilp as follows:
+        // For each stream k, the number of edges of the shortest path from its src to dst is
+        // computed as shortest path edges SPE. Then, for that stream k, the ILP model only
+        // contains routing options for paths with an edge count PE that satisfies
+        // 'PE <= path_length_cutoff_abs' and 'PE <= path_length_cutoff_rel * SPE'
+    },
+    "nodes": [
+        {
+            // id (str): a node label; currently restricted to nX for graph_tool compatibility
+            "id": "n0",
+
+            // is_switch (boolean): define node as switch or end point/host
+            "is_switch": true,
+
+            // processing_delay_ns (int): switch processing delay in nanoseconds
+            //                            (cf. proc_i in paper Sec. II)
+            "processing_delay_ns": 2000,
+
+            // fwd_header_b (int or null): number of header bytes to be received before switch can
+            //                             start processing (cf. fwd_i in paper Sec. II)
+            // - int for cut-through:
+            //   - variable number, based on switch model
+            //   - values stated here include preamble and SFD
+            //   - typically 24 bytes: preamble + SFD + MAC dst + MAC src + VLAN
+            // - null for store-and-forward:
+            //   - meaning "full frame" must be received before processing
+            //   - in this context "full frame" is Layer 2 frame size + preamble + SFD, but
+            //     excluding inter frame gap (IFG), which is not needed for the switch to start
+            //     processing the frame
+            "fwd_header_b": null,
+            // Note that some schedulers (jssp, nw-ilp_snf, tsnsched) generally assume
+            // store-and-forward delays.
+
+            // queues_per_port (int): number of egress queues per port, based on switch model
+            "queues_per_port": 8,
+            // This value is relevant for schedulers that support a buffering model of multiple FIFO
+            // queues (cf. paper Sec. II+III)
+
+            // optional hint for topology visualization (node position)
+            "pos": [-0.57, 0.57]
+        }
+        // more nodes ...
+    ],
+    "links": [
+        {
+            // key (str): a link label; currently restricted to eX for graph_tool compatibility
+            "key": "e0",
+            "source": "n0",
+            "target": "n1",
+            "link_speed_mbps": 1000,     // link speed in megabits/second
+            "propagation_delay_ns": 200  // propagation delay in nanoseconds
+                                         // (cf. prop_ij in paper Sec. II)
+        },
+        {
+            // opposite direction of e0 (note full-duplex Ethernet modeled as directed graph)
+            "key": "e1",
+            "source": "n1",
+            "target": "n0",
+            "link_speed_mbps": 1000,
+            "propagation_delay_ns": 200
+        }
+        // more links ...
+    ]
+}
+
+// concluding remarks:
+// id/key/source/target are networkx-defined key names

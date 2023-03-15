@@ -1,0 +1,34 @@
+{
+    "s0": { // stream identifier
+        "sources": ["n20"],      // source node
+        "destinations": ["n18"], // destination node (modeled as list for future multicast models)
+
+        "cycle_time_ns": 1000000, // sending interval in nanosecondes
+
+        // frame_size_b (int): - frame size in bytes
+        //                         - defined as Layer 2 frame size: includes MAC header to CRC
+        //                           checksum
+        //                         - Layer 1 inter frame gap (IFG), preamble and SFD not included
+        //                     - schedulers usually need to reserve an extra 20 bytes of time slot
+        //                       length for IFG (12 bytes) + preamble (7 bytes) + SFD (1 byte)
+        //                     - for reference, see IEEE Std. 802.3 Sec. 3.1.1 Packet format,
+        //                       Fig. 3.1 (p. 118 in 802.3-2018)
+        "frame_size_b": 236,
+
+        // max_latency_ns (int or null): - relative deadline counted from transmission start
+        //                                 at sender
+        //                               - null if not specified (not used for benchmarking)
+        "max_latency_ns": 28000,
+        // Note that this is not considered by the no-wait schedulers nw-ilp and jssp
+
+        // route: list of edges ["source", "target", "edge_label"] for a precomputed route
+        // - only used for schedulers without routing capability (such as tsnsched, jssp)
+        "route": [
+            ["n20", "n5", "e23"],
+            ["n5", "n4", "e19"],
+            ["n4", "n3", "e15"],
+            ["n3", "n18", "e16"]
+        ]
+    }
+    // more streams ...
+}
