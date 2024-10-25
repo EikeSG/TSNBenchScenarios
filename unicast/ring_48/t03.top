@@ -1,7 +1,9 @@
 {
    "directed": true,
    "multigraph": true,
-   "graph": {},
+   "graph": {
+      "latency_cutoff_rel": 3
+   },
    "nodes": [
       {"id": "n0", "is_switch": true, "processing_delay_ns": 4000, "fwd_header_b": 24, "queues_per_port": 8, "_imd_pos": [7.64, 0.0]},
       {"id": "n1", "is_switch": true, "processing_delay_ns": 4000, "fwd_header_b": 24, "queues_per_port": 8, "_imd_pos": [7.57, 1.0]},
